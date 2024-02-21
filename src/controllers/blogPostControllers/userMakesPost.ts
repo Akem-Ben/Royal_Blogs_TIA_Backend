@@ -25,12 +25,13 @@ export const userMakesPost = async(request:JwtPayload, response:Response)=>{
             })
         }
 
-        const {postText} = request.body;
+        const {postText, title} = request.body;
 
         const newPost = await BlogPost.create({
             id: v4(),
             ownerId: userId,
             postText,
+            title,
             likes: 0,
             dislikes: 0,
             postImage: request.file.path

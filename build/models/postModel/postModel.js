@@ -12,6 +12,10 @@ BlogPost.init({
         primaryKey: true,
         allowNull: false,
     },
+    title: {
+        type: sequelize_1.DataTypes.TEXT,
+        allowNull: false,
+    },
     postImage: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,

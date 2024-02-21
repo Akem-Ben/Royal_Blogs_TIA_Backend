@@ -23,11 +23,12 @@ const userMakesPost = async (request, response) => {
                 message: `User not found, contact admin`
             });
         }
-        const { postText } = request.body;
+        const { postText, title } = request.body;
         const newPost = await postModel_1.default.create({
             id: (0, uuid_1.v4)(),
             ownerId: userId,
             postText,
+            title,
             likes: 0,
             dislikes: 0,
             postImage: request.file.path

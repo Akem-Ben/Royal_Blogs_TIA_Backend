@@ -5,6 +5,7 @@ export interface BlogPostAttributes {
     id: string;
     ownerId: string;
     postText: string;
+    title: string;
     likes: number;
     dislikes: number;
     postImage: string;
@@ -17,6 +18,10 @@ BlogPost.init(
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
+      allowNull: false,
+    },
+    title: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     postImage: {

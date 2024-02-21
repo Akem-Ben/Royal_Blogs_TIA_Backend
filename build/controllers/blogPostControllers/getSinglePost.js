@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSinglePost = void 0;
 const postModel_1 = __importDefault(require("../../models/postModel/postModel"));
+const userModel_1 = __importDefault(require("../../models/userModel/userModel"));
 const getSinglePost = async (request, response) => {
     try {
         const { postId } = request.params;
@@ -15,10 +16,12 @@ const getSinglePost = async (request, response) => {
                 message: `Post not found`
             });
         }
+        const postOwner = await userModel_1.default.findOne({ where: { id: findPost.ownerId } });
         return response.status(200).json({
             status: `success`,
             message: `Post found successfully`,
-            findPost
+            findPost,
+            postOwner
         });
     }
     catch (error) {
