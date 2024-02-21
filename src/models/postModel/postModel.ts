@@ -7,6 +7,7 @@ export interface BlogPostAttributes {
     postText: string;
     likes: number;
     dislikes: number;
+    postImage: string;
 }
 
 export class BlogPost extends Model<BlogPostAttributes> {}
@@ -18,12 +19,16 @@ BlogPost.init(
       primaryKey: true,
       allowNull: false,
     },
+    postImage: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     ownerId:{
         type: DataTypes.UUID,
         allowNull: false,
     },
     postText: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     likes: {

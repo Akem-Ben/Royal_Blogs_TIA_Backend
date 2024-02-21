@@ -12,7 +12,7 @@ export const authorizationFunction = async (
   
       if (authorization === undefined) {
         return response.status(401).json({
-          message: `You are not authorized to view this page`,
+          message: `You are not authorized to view this page, login please`,
         });
       }
   
@@ -31,7 +31,7 @@ export const authorizationFunction = async (
       if(!user){
         return response.status(400).json({
           status: `error`,
-          message: `You are not allowed to access this resource. Contact the admin`
+          message: `You are not allowed to access this resource. Login or contact the admin`
         })
       }
   

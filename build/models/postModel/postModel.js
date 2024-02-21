@@ -12,12 +12,16 @@ BlogPost.init({
         primaryKey: true,
         allowNull: false,
     },
+    postImage: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     ownerId: {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
     postText: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
         allowNull: false,
     },
     likes: {

@@ -6,8 +6,8 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import userRouter from './routes/userRoutes/userRoutes'
-
+import userRouter from './routes/userRoutes/userRoutes';
+import postRoutes from './routes/postRoutes/postRoutes';
 
 const app = express()
 
@@ -22,6 +22,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors())
 
 app.use('/users', userRouter)
+app.use('/post', postRoutes)
 
 
 database.sync({}).then( ()=>{
