@@ -3,7 +3,7 @@ import { database } from "../../configurations/index";
 
 export interface UserAttributes {
   id: string;
-  profileImage: string;
+  profileImage: string | undefined;
   fullName: string;
   userName: string;
   email: string;

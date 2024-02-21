@@ -10,7 +10,8 @@ const uuid_1 = require("uuid");
 const notification_1 = require("../../utilities/notification");
 const registerUser = async (request, response) => {
     try {
-        const { fullName, userName, email, password, confirm_password } = request.body;
+        const { fullName, userName, email, password, confirmPassword } = request.body;
+        console.log(request.file);
         const checkUser = await userModel_1.default.findOne({ where: { email } });
         if (checkUser) {
             return response.status(400).json({
@@ -24,7 +25,8 @@ const registerUser = async (request, response) => {
                 message: `Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.`,
             });
         }
-        if (password !== confirm_password) {
+        console.log();
+        if (password !== confirmPassword) {
             return response.status(400).json({
                 status: `error`,
                 message: `password mismatch`,
@@ -33,7 +35,7 @@ const registerUser = async (request, response) => {
         const newPassword = await (0, helpers_1.hashPassword)(password);
         const newUser = await userModel_1.default.create({
             id: (0, uuid_1.v4)(),
-            profileImage: request.file.path,
+            profileImage: request?.file?.path,
             fullName,
             userName,
             email,
@@ -63,6 +65,7 @@ const registerUser = async (request, response) => {
         });
     }
     catch (error) {
+        // console.
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,

@@ -6,11 +6,11 @@ import { JwtPayload } from "jsonwebtoken";
 import { sendMail } from "../../utilities/notification";
 
 
-export const registerUser = async (request: JwtPayload, response: Response) => {
+export const registerUser = async (request: Request, response: Response) => {
   try {
-    const { fullName, userName, email, password, confirm_password } =
+    const { fullName, userName, email, password, confirmPassword } =
       request.body;
-
+console.log(request.file)
     const checkUser = await User.findOne({where: {email}})
 
     if(checkUser){
@@ -27,7 +27,9 @@ export const registerUser = async (request: JwtPayload, response: Response) => {
       });
     }
 
-    if (password !== confirm_password) {
+    console.log()
+
+    if (password !== confirmPassword) {
       return response.status(400).json({
         status: `error`,
         message: `password mismatch`,
@@ -38,7 +40,7 @@ export const registerUser = async (request: JwtPayload, response: Response) => {
 
     const newUser = await User.create({
       id: v4(),
-      profileImage: request.file.path,
+      profileImage: request?.file?.path,
       fullName,
       userName,
       email,
@@ -75,6 +77,7 @@ export const registerUser = async (request: JwtPayload, response: Response) => {
 
 
   } catch (error: any) {
+    // console.
     return response.status(500).json({
       status: `error`,
       message: `Internal Server Error`,
