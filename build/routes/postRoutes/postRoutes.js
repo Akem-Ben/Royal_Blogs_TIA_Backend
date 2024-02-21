@@ -11,7 +11,7 @@ const getSinglePost_1 = require("../../controllers/blogPostControllers/getSingle
 const deletePost_1 = require("../../controllers/blogPostControllers/deletePost");
 const getAllPosts_1 = require("../../controllers/blogPostControllers/getAllPosts");
 const userLikesPost_1 = require("../../controllers/likesControllers/userLikesPost");
-const userDislikes_1 = require("../../controllers/dislikesController/userDislikes");
+const userDislikes_1 = require("../../controllers/dislikesControllers/userDislikes");
 const router = express_1.default.Router();
 router.post("/create", authorization_1.authorizationFunction, upload_1.upload.single("postImage"), userMakesPost_1.userMakesPost);
 router.get('/singlePost/:postId', getSinglePost_1.getSinglePost);

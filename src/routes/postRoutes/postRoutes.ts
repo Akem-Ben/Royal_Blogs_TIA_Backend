@@ -6,7 +6,7 @@ import { getSinglePost } from "../../controllers/blogPostControllers/getSinglePo
 import { deletePost } from "../../controllers/blogPostControllers/deletePost";
 import { getAllPosts } from "../../controllers/blogPostControllers/getAllPosts";
 import { userLikesPost } from "../../controllers/likesControllers/userLikesPost";
-import { userDisLikesPost } from "../../controllers/dislikesController/userDislikes";
+import { userDisLikesPost } from "../../controllers/dislikesControllers/userDislikes";
 
 
 const router = express.Router();
