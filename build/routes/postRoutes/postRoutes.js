@@ -12,6 +12,8 @@ const deletePost_1 = require("../../controllers/blogPostControllers/deletePost")
 const getAllPosts_1 = require("../../controllers/blogPostControllers/getAllPosts");
 const userLikesPost_1 = require("../../controllers/likesControllers/userLikesPost");
 const userDislikes_1 = require("../../controllers/dislikesControllers/userDislikes");
+const userMakesComments_1 = require("../../controllers/commentsControllers/userMakesComments");
+const getAllPostComments_1 = require("../../controllers/commentsControllers/getAllPostComments");
 const router = express_1.default.Router();
 router.post("/create", authorization_1.authorizationFunction, upload_1.upload.single("postImage"), userMakesPost_1.userMakesPost);
 router.get('/singlePost/:postId', getSinglePost_1.getSinglePost);
@@ -19,4 +21,6 @@ router.delete('/userPost/:postId', authorization_1.authorizationFunction, delete
 router.get('/allPosts', getAllPosts_1.getAllPosts);
 router.post('/likePost/:postId', authorization_1.authorizationFunction, userLikesPost_1.userLikesPost);
 router.post('/dislikePost/:postId', authorization_1.authorizationFunction, userDislikes_1.userDisLikesPost);
+router.post('/makeComment/:postId', authorization_1.authorizationFunction, userMakesComments_1.userMakesComments);
+router.get('/allComments', getAllPostComments_1.getAllPostComments);
 exports.default = router;

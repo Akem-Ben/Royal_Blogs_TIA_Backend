@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Comment = void 0;
+exports.Comments = void 0;
 const sequelize_1 = require("sequelize");
 const index_1 = require("../../configurations/index");
-class Comment extends sequelize_1.Model {
+class Comments extends sequelize_1.Model {
 }
-exports.Comment = Comment;
-Comment.init({
+exports.Comments = Comments;
+Comments.init({
     commentId: {
         type: sequelize_1.DataTypes.UUID,
         primaryKey: true,
@@ -25,7 +25,7 @@ Comment.init({
         allowNull: false,
     },
     commentText: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.TEXT,
         allowNull: false,
     },
     likes: {
@@ -38,5 +38,5 @@ Comment.init({
     },
 }, {
     sequelize: index_1.database,
-    tableName: "Comment",
+    tableName: "Comments",
 });

@@ -11,9 +11,9 @@ export interface CommentAttributes {
     ownerId: string;
   }
   
-  export class Comment extends Model<CommentAttributes> {}
+  export class Comments extends Model<CommentAttributes> {}
   
-  Comment.init(
+  Comments.init(
     {
       commentId: {
         type: DataTypes.UUID,
@@ -33,7 +33,7 @@ export interface CommentAttributes {
         allowNull: false,
       },
       commentText: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       likes: {
@@ -47,6 +47,6 @@ export interface CommentAttributes {
     },
     {
       sequelize: database,
-      tableName: "Comment",
+      tableName: "Comments",
     }
   );
