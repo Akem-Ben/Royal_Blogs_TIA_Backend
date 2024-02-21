@@ -2,7 +2,7 @@ import {Response} from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 import BlogPost, { BlogPostAttributes } from '../../models/postModel/postModel';
 import Likes from '../../models/likesModel/likesModel';
-import Dislikes from '../../models/dislikesModel/dislikesModel';
+import Dislikes, { DislikesAttributes } from '../../models/dislikesModel/dislikesModel';
 import {v4} from 'uuid'
 
 export const userDisLikesPost = async (request: JwtPayload, response: Response) => {
@@ -35,10 +35,13 @@ export const userDisLikesPost = async (request: JwtPayload, response: Response) 
 
           const findNewPost = await BlogPost.findOne({where: {id:postId}}) as unknown as BlogPostAttributes
 
+          const testDislike = await Dislikes.findOne({where: {postId, ownerId:userId}})
+
           return response.status(201).json({
             status: `success`,
             message: 'post undisliked',
-            findNewPost
+            findNewPost,
+            testDislike
           })
         }
 
@@ -60,26 +63,31 @@ export const userDisLikesPost = async (request: JwtPayload, response: Response) 
           id: v4(),
           postId,
           ownerId: userId
-        })
+        }) as unknown as DislikesAttributes
 
         if(newDisLike){
           let blogDisLikes = findPost.dislikes
 
           const newDisLikes = blogDisLikes + 1
 
-          await BlogPost.update({likes: newDisLikes}, {where: {id:postId}})
+          await BlogPost.update({dislikes: newDisLikes}, {where: {id:postId}})
 
           const newPost = await BlogPost.findOne({where: {id:postId}})
 
-          
+          const findDisLike = await Dislikes.findOne({where: {id:newDisLike.id}})
+
           return response.status(200).json({
             status: `success`,
             message: `post successfully disliked`,
-            newPost
+            newPost,
+            findDisLike
           })
         }
 
-   
+        return response.status(400).json({
+          status: `error`,
+          message: `post not successfully liked`,
+        })
 
 
         } catch (error: any) {

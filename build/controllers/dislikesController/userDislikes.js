@@ -26,10 +26,12 @@ const userDisLikesPost = async (request, response) => {
             const newNumberOfDisLikes = numberOfDisLikes - 1;
             const updatePostLikes = await postModel_1.default.update({ dislikes: newNumberOfDisLikes }, { where: { id: postId } });
             const findNewPost = await postModel_1.default.findOne({ where: { id: postId } });
+            const testDislike = await dislikesModel_1.default.findOne({ where: { postId, ownerId: userId } });
             return response.status(201).json({
                 status: `success`,
                 message: 'post undisliked',
-                findNewPost
+                findNewPost,
+                testDislike
             });
         }
         const checkIfLiked = await likesModel_1.default.findOne({ where: { postId, ownerId: userId } });
@@ -47,14 +49,20 @@ const userDisLikesPost = async (request, response) => {
         if (newDisLike) {
             let blogDisLikes = findPost.dislikes;
             const newDisLikes = blogDisLikes + 1;
-            await postModel_1.default.update({ likes: newDisLikes }, { where: { id: postId } });
+            await postModel_1.default.update({ dislikes: newDisLikes }, { where: { id: postId } });
             const newPost = await postModel_1.default.findOne({ where: { id: postId } });
+            const findDisLike = await dislikesModel_1.default.findOne({ where: { id: newDisLike.id } });
             return response.status(200).json({
                 status: `success`,
                 message: `post successfully disliked`,
-                newPost
+                newPost,
+                findDisLike
             });
         }
+        return response.status(400).json({
+            status: `error`,
+            message: `post not successfully liked`,
+        });
     }
     catch (error) {
         return response.status(500).json({

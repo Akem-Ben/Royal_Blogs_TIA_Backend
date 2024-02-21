@@ -1,7 +1,7 @@
 import {Response} from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 import BlogPost, { BlogPostAttributes } from '../../models/postModel/postModel';
-import Likes from '../../models/likesModel/likesModel';
+import Likes, { LikesAttributes } from '../../models/likesModel/likesModel';
 import Dislikes from '../../models/dislikesModel/dislikesModel';
 import {v4} from 'uuid'
 
@@ -35,10 +35,13 @@ export const userLikesPost = async (request: JwtPayload, response: Response) => 
 
           const findNewPost = await BlogPost.findOne({where: {id:postId}}) as unknown as BlogPostAttributes
 
+          const testLike = await Likes.findOne({where: {postId, ownerId:userId}})
+
           return response.status(201).json({
             status: `success`,
             message: 'post unliked',
-            findNewPost
+            findNewPost,
+            testLike
           })
         }
 
@@ -61,7 +64,7 @@ export const userLikesPost = async (request: JwtPayload, response: Response) => 
           id: v4(),
           postId,
           ownerId: userId
-        })
+        }) as unknown as LikesAttributes
 
         if(newLike){
           let blogLikes = findPost.likes
@@ -72,14 +75,21 @@ export const userLikesPost = async (request: JwtPayload, response: Response) => 
 
           const newPost = await BlogPost.findOne({where: {id:postId}})
 
+          const findLike = await Likes.findOne({where: {id:newLike.id}})
+
           
           return response.status(200).json({
             status: `success`,
             message: `post successfully liked`,
-            newPost
+            newPost,
+            findLike
           })
         }
 
+        return response.status(400).json({
+          status: `error`,
+          message: `post not successfully liked`,
+        })
    
 
 
