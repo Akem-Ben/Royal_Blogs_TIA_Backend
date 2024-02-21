@@ -11,12 +11,11 @@ const notification_1 = require("../../utilities/notification");
 const registerUser = async (request, response) => {
     try {
         const { fullName, userName, email, password, confirmPassword } = request.body;
-        console.log(request.file);
         const checkUser = await userModel_1.default.findOne({ where: { email } });
         if (checkUser) {
             return response.status(400).json({
                 status: `error`,
-                message: `this email already exists, proceed to login`
+                message: `This email already exists, proceed to login`
             });
         }
         if (!(0, helpers_1.passwordTest)(password)) {
@@ -65,7 +64,6 @@ const registerUser = async (request, response) => {
         });
     }
     catch (error) {
-        // console.
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,

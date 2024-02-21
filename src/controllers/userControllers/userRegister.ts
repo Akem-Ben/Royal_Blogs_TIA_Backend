@@ -10,13 +10,13 @@ export const registerUser = async (request: Request, response: Response) => {
   try {
     const { fullName, userName, email, password, confirmPassword } =
       request.body;
-console.log(request.file)
+
     const checkUser = await User.findOne({where: {email}})
 
     if(checkUser){
       return response.status(400).json({
         status: `error`,
-        message: `this email already exists, proceed to login`
+        message: `This email already exists, proceed to login`
       })
     }
 
@@ -77,7 +77,6 @@ console.log(request.file)
 
 
   } catch (error: any) {
-    // console.
     return response.status(500).json({
       status: `error`,
       message: `Internal Server Error`,
