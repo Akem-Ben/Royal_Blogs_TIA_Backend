@@ -5,6 +5,7 @@ import Dislikes from '../../models/dislikesModel/dislikesModel';
 export const getAllPostDislikes = async(request:Request, response:Response)=>{
     try{
 
+        console.log(request.params)
         const {postId} = request.params
 
         const allDislikes = await Dislikes.findAll({where:{postId}})

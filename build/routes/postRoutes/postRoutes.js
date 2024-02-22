@@ -14,6 +14,8 @@ const userLikesPost_1 = require("../../controllers/likesControllers/userLikesPos
 const userDislikes_1 = require("../../controllers/dislikesControllers/userDislikes");
 const userMakesComments_1 = require("../../controllers/commentsControllers/userMakesComments");
 const getAllPostComments_1 = require("../../controllers/commentsControllers/getAllPostComments");
+const getLikesAndLikers_1 = require("../../controllers/likesControllers/getLikesAndLikers");
+const getDislikeAndDislikers_1 = require("../../controllers/dislikesControllers/getDislikeAndDislikers");
 const router = express_1.default.Router();
 router.post("/create", authorization_1.authorizationFunction, upload_1.upload.single("postImage"), userMakesPost_1.userMakesPost);
 router.get('/singlePost/:postId', getSinglePost_1.getSinglePost);
@@ -23,4 +25,6 @@ router.post('/likePost/:postId', authorization_1.authorizationFunction, userLike
 router.post('/dislikePost/:postId', authorization_1.authorizationFunction, userDislikes_1.userDisLikesPost);
 router.post('/makeComment/:postId', authorization_1.authorizationFunction, userMakesComments_1.userMakesComments);
 router.get('/allComments/:postId', getAllPostComments_1.getAllPostComments);
+router.get('/allLikes/:postId', getLikesAndLikers_1.getAllPostLikes);
+router.get('/allDislikes/:postId', getDislikeAndDislikers_1.getAllPostDislikes);
 exports.default = router;

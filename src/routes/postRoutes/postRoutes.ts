@@ -9,6 +9,8 @@ import { userLikesPost } from "../../controllers/likesControllers/userLikesPost"
 import { userDisLikesPost } from "../../controllers/dislikesControllers/userDislikes";
 import { userMakesComments } from "../../controllers/commentsControllers/userMakesComments";
 import { getAllPostComments } from "../../controllers/commentsControllers/getAllPostComments";
+import { getAllPostLikes } from "../../controllers/likesControllers/getLikesAndLikers";
+import { getAllPostDislikes } from "../../controllers/dislikesControllers/getDislikeAndDislikers";
 
 
 const router = express.Router();
@@ -21,7 +23,8 @@ router.post('/likePost/:postId', authorizationFunction, userLikesPost)
 router.post('/dislikePost/:postId', authorizationFunction, userDisLikesPost)
 router.post('/makeComment/:postId', authorizationFunction, userMakesComments)
 router.get('/allComments/:postId', getAllPostComments)
-
+router.get('/allLikes/:postId', getAllPostLikes)
+router.get('/allDislikes/:postId', getAllPostDislikes)
 
 
 
