@@ -22,5 +22,5 @@ router.get('/allPosts', getAllPosts_1.getAllPosts);
 router.post('/likePost/:postId', authorization_1.authorizationFunction, userLikesPost_1.userLikesPost);
 router.post('/dislikePost/:postId', authorization_1.authorizationFunction, userDislikes_1.userDisLikesPost);
 router.post('/makeComment/:postId', authorization_1.authorizationFunction, userMakesComments_1.userMakesComments);
-router.get('/allComments', getAllPostComments_1.getAllPostComments);
+router.get('/allComments/:postId', getAllPostComments_1.getAllPostComments);
 exports.default = router;

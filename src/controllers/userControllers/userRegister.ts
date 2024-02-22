@@ -27,8 +27,6 @@ export const registerUser = async (request: Request, response: Response) => {
       });
     }
 
-    console.log()
-
     if (password !== confirmPassword) {
       return response.status(400).json({
         status: `error`,

@@ -3,9 +3,11 @@ import { JwtPayload } from 'jsonwebtoken';
 import {v4} from 'uuid';
 import { CommentAttributes, Comments } from '../../models/commentModel/commentModel';
 import User, { UserAttributes } from '../../models/userModel/userModel';
+import BlogPost from '../../models/postModel/postModel';
 
 export const userMakesComments = async(request:JwtPayload, response:Response)=>{
     try{
+
         const {commentText} = request.body;
 
         const userId = request.user.id
@@ -14,7 +16,7 @@ export const userMakesComments = async(request:JwtPayload, response:Response)=>{
 
         const {postId} = request.params
 
-        const findPost = await postId.findOne({where: {id:postId}})
+        const findPost = await BlogPost.findOne({where: {id:postId}})
 
         if(!findPost){
             return response.status(404).json({
@@ -48,6 +50,7 @@ export const userMakesComments = async(request:JwtPayload, response:Response)=>{
             findComment
         })
     }catch(error:any){
+        console.log(error.message)
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,

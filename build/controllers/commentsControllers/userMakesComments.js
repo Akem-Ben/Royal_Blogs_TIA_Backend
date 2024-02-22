@@ -7,13 +7,14 @@ exports.userMakesComments = void 0;
 const uuid_1 = require("uuid");
 const commentModel_1 = require("../../models/commentModel/commentModel");
 const userModel_1 = __importDefault(require("../../models/userModel/userModel"));
+const postModel_1 = __importDefault(require("../../models/postModel/postModel"));
 const userMakesComments = async (request, response) => {
     try {
         const { commentText } = request.body;
         const userId = request.user.id;
         const user = await userModel_1.default.findOne({ where: { id: userId } });
         const { postId } = request.params;
-        const findPost = await postId.findOne({ where: { id: postId } });
+        const findPost = await postModel_1.default.findOne({ where: { id: postId } });
         if (!findPost) {
             return response.status(404).json({
                 status: `error`,
@@ -43,6 +44,7 @@ const userMakesComments = async (request, response) => {
         });
     }
     catch (error) {
+        console.log(error.message);
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,

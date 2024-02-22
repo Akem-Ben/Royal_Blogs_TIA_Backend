@@ -20,7 +20,7 @@ router.get('/allPosts', getAllPosts)
 router.post('/likePost/:postId', authorizationFunction, userLikesPost)
 router.post('/dislikePost/:postId', authorizationFunction, userDisLikesPost)
 router.post('/makeComment/:postId', authorizationFunction, userMakesComments)
-router.get('/allComments', getAllPostComments)
+router.get('/allComments/:postId', getAllPostComments)
 
 
 

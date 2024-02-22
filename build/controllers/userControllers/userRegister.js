@@ -24,7 +24,6 @@ const registerUser = async (request, response) => {
                 message: `Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.`,
             });
         }
-        console.log();
         if (password !== confirmPassword) {
             return response.status(400).json({
                 status: `error`,
