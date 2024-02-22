@@ -15,7 +15,7 @@ const registerUser = async (request, response) => {
         if (checkUser) {
             return response.status(400).json({
                 status: `error`,
-                message: `This email already exists, proceed to login`
+                message: `This email already exists, proceed to login`,
             });
         }
         if (!(0, helpers_1.passwordTest)(password)) {
@@ -38,35 +38,37 @@ const registerUser = async (request, response) => {
             userName,
             email,
             password: newPassword,
-            isVerified: false
+            isVerified: false,
         });
-        const findUser = await userModel_1.default.findOne({ where: { email } });
+        const findUser = (await userModel_1.default.findOne({
+            where: { email },
+        }));
         if (!findUser) {
             return response.status(400).json({
                 status: `error`,
-                message: `Unable to register user, contact admin`
+                message: `Unable to register user, contact admin`,
             });
         }
         const tokenData = {
             data: {
                 id: findUser.id,
-                email: findUser.email
+                email: findUser.email,
             },
-            expires: '10min'
+            expires: "10min",
         };
         const token = (0, helpers_1.generateToken)(tokenData);
         await (0, notification_1.sendMail)(email, token);
         return response.status(200).json({
             status: `success`,
-            message: `User registered successfully`,
-            findUser
+            message: `User registered successfully, a mail has been sent to your email, click on the link in it to verify your account`,
+            findUser,
         });
     }
     catch (error) {
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,
-            error: error.message
+            error: error.message,
         });
     }
 };

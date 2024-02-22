@@ -24,7 +24,7 @@ const userLogin = async (request, response) => {
         if (!checkUserName && !checkEmail) {
             return response.status(404).json({
                 status: `error`,
-                message: `${loginKey} not found`,
+                message: `${loginKey} not registered`,
             });
         }
         if (!user.isVerified) {
