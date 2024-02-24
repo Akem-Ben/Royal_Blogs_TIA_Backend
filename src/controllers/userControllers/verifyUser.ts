@@ -34,8 +34,6 @@ export const verifyUser = async(request:Request, response:Response)=>{
 
         if(updateUser[0]==1){
 
-        console.log(updateUser)
-
         const newUser = await User.findOne({where: {id:decode.id}})
 
         return response.status(200).json({

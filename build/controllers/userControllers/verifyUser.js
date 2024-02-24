@@ -31,7 +31,6 @@ const verifyUser = async (request, response) => {
         }
         const updateUser = await userModel_1.default.update({ isVerified: true }, { where: { id: user.id } });
         if (updateUser[0] == 1) {
-            console.log(updateUser);
             const newUser = await userModel_1.default.findOne({ where: { id: decode.id } });
             return response.status(200).json({
                 status: `success`,
