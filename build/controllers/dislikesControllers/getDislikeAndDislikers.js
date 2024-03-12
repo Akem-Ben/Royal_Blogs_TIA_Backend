@@ -8,7 +8,6 @@ const userModel_1 = __importDefault(require("../../models/userModel/userModel"))
 const dislikesModel_1 = __importDefault(require("../../models/dislikesModel/dislikesModel"));
 const getAllPostDislikes = async (request, response) => {
     try {
-        console.log(request.params);
         const { postId } = request.params;
         const allDislikes = await dislikesModel_1.default.findAll({ where: { postId } });
         let dislikesWithOwners = await Promise.all(allDislikes.map(async (dislikes) => {
