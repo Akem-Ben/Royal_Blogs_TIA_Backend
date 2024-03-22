@@ -14,5 +14,5 @@ exports.database = new sequelize_1.Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, 
     logging: false,
     dialectOptions: {
         encrypt: true
-    }
+    },
 });
