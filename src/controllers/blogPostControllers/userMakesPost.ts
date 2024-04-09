@@ -9,6 +9,8 @@ export const userMakesPost = async(request:JwtPayload, response:Response)=>{
     try{
         const userId = request.user.id
 
+        console.log('userId', userId)
+
         if(!userId){
             return response.status(400).json({
                 status: `error`,
@@ -52,6 +54,7 @@ export const userMakesPost = async(request:JwtPayload, response:Response)=>{
             findPost
         })
     }catch(error:any){
+        console.log(error.message)
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,

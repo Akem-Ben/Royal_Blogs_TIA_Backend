@@ -10,6 +10,7 @@ const uuid_1 = require("uuid");
 const userMakesPost = async (request, response) => {
     try {
         const userId = request.user.id;
+        console.log('userId', userId);
         if (!userId) {
             return response.status(400).json({
                 status: `error`,
@@ -47,6 +48,7 @@ const userMakesPost = async (request, response) => {
         });
     }
     catch (error) {
+        console.log(error.message);
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,

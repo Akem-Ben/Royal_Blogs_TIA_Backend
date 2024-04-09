@@ -37,7 +37,17 @@ export const authorizationFunction = async (
   
       request.user = decode;
       next();
-    } catch (error: any) {
+    }  catch (error: any) {
+      if(error.message === 'jwt expired' || error.message === 'invalid signature'){
+        return response.status(405).json({
+          status: 'error',
+          message: 'Session Expired. Please log in again.',
+        });
+      }
       console.log(error.message);
+      return response.status(500).json({
+        status: `error`,
+        message: `Internal Server Error: ${error}`,
+      })
     }
   };

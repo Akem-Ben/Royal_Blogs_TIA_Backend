@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -w",
-    "production": "cross-env NODE_ENV=production nodemon build/app.js",
-    "development": "cross-env NODE_ENV=development nodemon build/app.js"
+    "prod": "cross-env NODE_ENV=production nodemon build/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon build/app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
