@@ -9,8 +9,6 @@ export const userMakesPost = async(request:JwtPayload, response:Response)=>{
     try{
         const userId = request.user.id
 
-        console.log('userId', userId)
-
         if(!userId){
             return response.status(400).json({
                 status: `error`,

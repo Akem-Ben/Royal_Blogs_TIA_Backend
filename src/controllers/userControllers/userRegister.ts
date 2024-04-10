@@ -78,6 +78,7 @@ export const registerUser = async (request: Request, response: Response) => {
       findUser,
     });
   } catch (error: any) {
+    console.log(error.message)
     return response.status(500).json({
       status: `error`,
       message: `Internal Server Error`,

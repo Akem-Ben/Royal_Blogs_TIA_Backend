@@ -65,6 +65,7 @@ const registerUser = async (request, response) => {
         });
     }
     catch (error) {
+        console.log(error.message);
         return response.status(500).json({
             status: `error`,
             message: `Internal Server Error`,
