@@ -12,6 +12,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes/userRoutes"));
 const postRoutes_1 = __importDefault(require("./routes/postRoutes/postRoutes"));
+const config_1 = __importDefault(require("./configurations/config"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 app.use(body_parser_1.default.json());
@@ -27,6 +28,6 @@ configurations_1.database.sync({}).then(() => {
 }).catch((err) => {
     console.log(err);
 });
-app.listen(process.env.Port, () => {
-    console.log(`server running on port ${process.env.Port}`);
+app.listen(config_1.default.PORT, () => {
+    console.log(`server running on Port ${config_1.default.PORT}`);
 });

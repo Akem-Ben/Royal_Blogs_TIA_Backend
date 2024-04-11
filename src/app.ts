@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import userRouter from './routes/userRoutes/userRoutes';
 import postRoutes from './routes/postRoutes/postRoutes';
+import config from './configurations/config';
 
 const app = express()
 
@@ -32,6 +33,6 @@ database.sync({}).then( ()=>{
 })
 
 
-app.listen(process.env.Port, ()=>{
-    console.log(`server running on port ${process.env.Port}`)
+app.listen(config.PORT, ()=>{
+    console.log(`server running on Port ${config.PORT}`)
 })

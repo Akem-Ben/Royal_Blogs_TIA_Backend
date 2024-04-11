@@ -12,7 +12,6 @@ if(stage === "development"){
     config = require("./production").default
 }
 
-
 export default merge({
     stage
 }, config)
