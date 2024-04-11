@@ -16,16 +16,22 @@ const config_1 = __importDefault(require("./configurations/config"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 app.use(body_parser_1.default.json());
-app.use((0, morgan_1.default)('dev'));
+app.use((0, morgan_1.default)("dev"));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cors_1.default)());
-app.use('/users', userRoutes_1.default);
-app.use('/post', postRoutes_1.default);
-configurations_1.database.sync({}).then(() => {
+app.use("/users", userRoutes_1.default);
+app.use("/post", postRoutes_1.default);
+app.get("/", (request, response) => {
+    response.send("Express on Vercel");
+});
+configurations_1.database
+    .sync({})
+    .then(() => {
     console.log("Database is connected");
-}).catch((err) => {
+})
+    .catch((err) => {
     console.log(err);
 });
 app.listen(config_1.default.PORT, () => {
