@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import BlogPost, { BlogPostAttributes } from '../../models/postModel/postModel';
 import User, { UserAttributes } from '../../models/userModel/userModel';
+import { CommentAttributes, Comments } from '../../models/commentModel/commentModel';
 
 export const getAllPosts = async(request:Request, response:Response) => {
     try{
@@ -9,12 +10,16 @@ export const getAllPosts = async(request:Request, response:Response) => {
 
         let postsWithOwners: BlogPostAttributes[] = await Promise.all(allPosts.map(async (post: BlogPostAttributes) => {
             const owner = await User.findOne({ where: { id: post.ownerId } }) as unknown as UserAttributes;
+            const comments = await Comments.findAll({ where: { postId: post.id } }) as unknown as CommentAttributes[];
             if (owner) {
-                return {
+
+                const response:any = {
                     ...post,
                     ownerName: owner.fullName,
                     ownerImage: owner.profileImage
                 };
+                response.comments = comments;
+                return response
             } else {
                 console.error(`Owner not found for post with ID: ${post.id}`);
                 return post;

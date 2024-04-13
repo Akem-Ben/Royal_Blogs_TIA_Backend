@@ -6,17 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllPosts = void 0;
 const postModel_1 = __importDefault(require("../../models/postModel/postModel"));
 const userModel_1 = __importDefault(require("../../models/userModel/userModel"));
+const commentModel_1 = require("../../models/commentModel/commentModel");
 const getAllPosts = async (request, response) => {
     try {
         const allPosts = await postModel_1.default.findAll({});
         let postsWithOwners = await Promise.all(allPosts.map(async (post) => {
             const owner = await userModel_1.default.findOne({ where: { id: post.ownerId } });
+            const comments = await commentModel_1.Comments.findAll({ where: { postId: post.id } });
             if (owner) {
-                return {
+                const response = {
                     ...post,
                     ownerName: owner.fullName,
                     ownerImage: owner.profileImage
                 };
+                response.comments = comments;
+                return response;
             }
             else {
                 console.error(`Owner not found for post with ID: ${post.id}`);
