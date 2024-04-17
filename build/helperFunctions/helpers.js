@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.passwordTest = exports.convertToISODateString = exports.convertToDDMMYY = exports.generateToken = exports.hashPassword = void 0;
+exports.handleDeleteCloudinaryAPI = exports.passwordTest = exports.convertToISODateString = exports.convertToDDMMYY = exports.generateToken = exports.hashPassword = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -50,3 +50,9 @@ const passwordTest = (password) => {
     return passwordTest ? true : false;
 };
 exports.passwordTest = passwordTest;
+const handleDeleteCloudinaryAPI = (imageLink) => {
+    imageLink = imageLink.split(".");
+    imageLink.splice(-1);
+    return imageLink.join(".");
+};
+exports.handleDeleteCloudinaryAPI = handleDeleteCloudinaryAPI;

@@ -49,3 +49,9 @@ export const passwordTest = (password:string)=>{
     const passwordTest = passwordRegex.test(password)
     return passwordTest ? true : false
 }
+
+export const handleDeleteCloudinaryAPI = (imageLink:any)=> {
+  imageLink = imageLink.split(".")
+  imageLink.splice(-1)
+return imageLink.join(".")
+}

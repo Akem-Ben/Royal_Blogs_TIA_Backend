@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.post("/create", authorizationFunction, upload.single("postImage"), userMakesPost);
 router.get('/singlePost/:postId', getSinglePost)
-router.delete('/userPost/:postId', authorizationFunction, deletePost)
+router.delete('/deleteUserPost/:postId', authorizationFunction, deletePost)
 router.get('/allPosts', getAllPosts)
 router.post('/likePost/:postId', authorizationFunction, userLikesPost)
 router.post('/dislikePost/:postId', authorizationFunction, userDisLikesPost)
