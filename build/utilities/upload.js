@@ -38,3 +38,11 @@ exports.upload = (0, multer_1.default)({
         }
     }
 });
+// export const imageDeletion = async(public_id:string, resource_type?:string)=> {
+//     try{
+//         const data = await cloudinary.uploader.destroy(public_id, { resource_type });
+//         return data
+//     }catch(error:any){
+//         console.log(error.message)
+//     }
+// }

@@ -21,6 +21,7 @@ const storage = new CloudinaryStorage({
     }
 })
 
+
 export const upload = multer({
     storage: storage,
     fileFilter: (req:Request, file, cb)=>{
@@ -38,3 +39,11 @@ export const upload = multer({
         }
     }
 })
+// export const imageDeletion = async(public_id:string, resource_type?:string)=> {
+//     try{
+//         const data = await cloudinary.uploader.destroy(public_id, { resource_type });
+//         return data
+//     }catch(error:any){
+//         console.log(error.message)
+//     }
+// }

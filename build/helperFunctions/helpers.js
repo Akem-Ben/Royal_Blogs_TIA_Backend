@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleDeleteCloudinaryAPI = exports.passwordTest = exports.convertToISODateString = exports.convertToDDMMYY = exports.generateToken = exports.hashPassword = void 0;
+exports.passwordTest = exports.convertToISODateString = exports.convertToDDMMYY = exports.generateToken = exports.hashPassword = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -25,7 +25,6 @@ const convertToDDMMYY = (isoDateString) => {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear().toString().slice(-2);
     return `${day}-${month}-${year}`;
-    // 27-09-2025
 };
 exports.convertToDDMMYY = convertToDDMMYY;
 const convertToISODateString = (regularDateString) => {
@@ -34,14 +33,12 @@ const convertToISODateString = (regularDateString) => {
         const day = dateParts[0].padStart(2, '0');
         const month = dateParts[1].padStart(2, '0');
         const year = dateParts[2];
-        // Ensure the date is valid by constructing a Date object
         const date = new Date(`${year}-${month}-${day}`);
-        // Check if the date is valid after parsing
         if (!isNaN(date.getTime())) {
             return date.toISOString().slice(0, 10);
         }
     }
-    return null; // Return null for invalid or unrecognized input
+    return null;
 };
 exports.convertToISODateString = convertToISODateString;
 const passwordTest = (password) => {
@@ -50,9 +47,27 @@ const passwordTest = (password) => {
     return passwordTest ? true : false;
 };
 exports.passwordTest = passwordTest;
-const handleDeleteCloudinaryAPI = (imageLink) => {
-    imageLink = imageLink.split(".");
-    imageLink.splice(-1);
-    return imageLink.join(".");
-};
-exports.handleDeleteCloudinaryAPI = handleDeleteCloudinaryAPI;
+// export const handleDeleteCloudinaryAPIImageString = (imageLink:string) => {
+//   const parts = imageLink.split("/");
+//   const publicIdPart = parts.slice(-1)
+//   const publicId = publicIdPart.join().split(".")[0]
+//   return publicId;
+// }
+// export const getResourceTypeFromExtension = (imageUrl:string) => {
+//   const extension = imageUrl.split('.').pop()?.toLowerCase();
+//   switch (extension) {
+//     case 'jpg':
+//     case 'jpeg':
+//     case 'png':
+//     case 'gif':
+//     case 'webp':
+//     case 'avif':
+//       return 'image';
+//     case 'mp4':
+//     case 'mov':
+//     case 'wmv':
+//       return 'video';
+//     default:
+//       return undefined;
+//   }
+// }

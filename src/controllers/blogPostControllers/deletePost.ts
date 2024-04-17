@@ -5,8 +5,6 @@ import BlogPost, { BlogPostAttributes } from "../../models/postModel/postModel";
 import { Comments } from "../../models/commentModel/commentModel";
 import Dislikes from "../../models/dislikesModel/dislikesModel";
 import Likes from "../../models/likesModel/likesModel";
-import { v2 as cloudinary } from 'cloudinary';
-import { handleDeleteCloudinaryAPI } from "../../helperFunctions/helpers";
 
 export const deletePost = async (request: JwtPayload, response: Response) => {
   try {
@@ -26,14 +24,6 @@ export const deletePost = async (request: JwtPayload, response: Response) => {
         message: `You are not authorised to delete this post`,
       });
     }
-
-    const imageToDeleteFromCloudinary = handleDeleteCloudinaryAPI(findPost.postImage)
-
-    console.log(imageToDeleteFromCloudinary)
-    
-    let test = await cloudinary.uploader.destroy(imageToDeleteFromCloudinary);
-    
-    console.log(test)
 
     const deleted = await BlogPost.destroy({
       where: { id: findPost.id, ownerId: userId },

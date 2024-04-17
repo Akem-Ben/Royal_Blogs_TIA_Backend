@@ -9,8 +9,6 @@ const postModel_1 = __importDefault(require("../../models/postModel/postModel"))
 const commentModel_1 = require("../../models/commentModel/commentModel");
 const dislikesModel_1 = __importDefault(require("../../models/dislikesModel/dislikesModel"));
 const likesModel_1 = __importDefault(require("../../models/likesModel/likesModel"));
-const cloudinary_1 = require("cloudinary");
-const helpers_1 = require("../../helperFunctions/helpers");
 const deletePost = async (request, response) => {
     try {
         const userId = request.user.id;
@@ -25,10 +23,6 @@ const deletePost = async (request, response) => {
                 message: `You are not authorised to delete this post`,
             });
         }
-        const imageToDeleteFromCloudinary = (0, helpers_1.handleDeleteCloudinaryAPI)(findPost.postImage);
-        console.log(imageToDeleteFromCloudinary);
-        let test = await cloudinary_1.v2.uploader.destroy(imageToDeleteFromCloudinary);
-        console.log(test);
         const deleted = await postModel_1.default.destroy({
             where: { id: findPost.id, ownerId: userId },
         });
