@@ -25,7 +25,7 @@ app.use("/users", userRouter);
 app.use("/post", postRoutes);
 
 app.get("/", (request: Request, response: Response) => {
-  response.send("Express on Vercel");
+  response.send("Express on Netlify");
 });
 
 database

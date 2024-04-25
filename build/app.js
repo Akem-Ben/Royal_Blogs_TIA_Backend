@@ -24,7 +24,7 @@ app.use((0, cors_1.default)());
 app.use("/users", userRoutes_1.default);
 app.use("/post", postRoutes_1.default);
 app.get("/", (request, response) => {
-    response.send("Express on Vercel");
+    response.send("Express on Netlify");
 });
 configurations_1.database
     .sync({})
