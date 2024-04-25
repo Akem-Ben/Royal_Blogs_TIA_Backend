@@ -24,7 +24,7 @@ const sendMail = async (to, token) => {
             html: `<div width="50%" style="text-align: center; padding: 25px; border-radius: 5px; border: 2px solid #27AE60;"><h1>Welcome to BetaTech Blog</h1>
               <p style="margin-bottom: 10px">Click the button below to verify your account</p>
               <br />
-              <a href="${process.env.APP_BASE_URL}/${token}" style="text-align: center; padding: 10px; border-radius: 10px; background: #27AE60; text-decoration: none; color: white;">Verify Account</a></div>`,
+              <span onClick={() => window.open('${process.env.APP_BASE_URL}/${token}', '_blank')} style="text-align: center; padding: 10px; border-radius: 10px; background: #27AE60; text-decoration: none; color: white;">Verify Account</div>`
         });
     }
     catch (err) {
@@ -32,3 +32,4 @@ const sendMail = async (to, token) => {
     }
 };
 exports.sendMail = sendMail;
+//<a href="${process.env.APP_BASE_URL}/${token}" style="text-align: center; padding: 10px; border-radius: 10px; background: #27AE60; text-decoration: none; color: white;">
