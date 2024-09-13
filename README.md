@@ -111,3 +111,233 @@ APP_BASE_URL = YOUR APP_BASE_URL
 ├── tsconfig.json
 └── README.md
 ```
+
+
+## API Routes
+#### User Routes
+
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POST</td>
+      <td>/users/signup</td>
+      <td>Register a new user (requires profile image)</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/verify/:token</td>
+      <td>Verify user email using a token</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/login</td>
+      <td>Log in a user</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/users/profile</td>
+      <td>Get the profile of the logged-in user (requires auth)</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/resendVerification</td>
+      <td>Resend the verification email</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+#### Blog Post Routes
+
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POST</td>
+      <td>/post/create</td>
+      <td>Create a new blog post (requires auth and image upload)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/post/singlePost/:postId</td>
+      <td>Get a single blog post</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/post/deleteUserPost/:postId</td>
+      <td>Delete a blog post (requires auth)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/post/allPosts</td>
+      <td>Get all blog posts</td>
+    </tr>
+  </tbody>
+</table>
+
+
+#### Comments Routes
+
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POST</td>
+      <td>/post/makeComment/:postId</td>
+      <td>Make a comment on a blog post (requires auth)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/post/allComments/:postId</td>
+      <td>Get all comments for a post</td>
+    </tr>
+  </tbody>
+</table>
+
+
+#### Likes Routes
+
+
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POST</td>
+      <td>/post/likePost/:postId</td>
+      <td>Like a blog post (requires auth)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/post/allLikes/:postId</td>
+      <td>Get all likes for a blog post</td>
+    </tr>
+  </tbody>
+</table>
+
+
+#### Dislikes Routes
+
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POST</td>
+      <td>/post/dislikePost/:postId</td>
+      <td>Dislike a blog post (requires auth)</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/post/allDislikes/:postId</td>
+      <td>Get all dislikes for a blog post</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Models
+
+<ul>
+<li> 
+User: Stores user details such as username, email, password, and profile image.
+</li>
+<li>
+BlogPost: Stores blog post information like title, image, text, likes, and dislikes.
+</li>
+<li>
+Comment: Stores comments made on blog posts.
+</li>
+<li>
+Likes: Tracks users who like a post.
+</li>
+<li>
+Dislikes: Tracks users who dislike a post.
+</li>
+</ul>
+
+
+## Helper Functions
+
+<ul>
+<li>
+hashPassword: Hashes the user password using bcrypt.
+</li>
+<li>
+generateToken: Generates JWT tokens for authentication.
+</li>
+<li>
+convertToDDMMYY: Converts an ISO date to DD-MM-YY format.
+</li>
+<li>
+convertToISODateString: Converts a regular date string to ISO format.
+</li>
+<li>
+passwordTest: Validates the strength of user passwords using regex.
+</li>
+</ul>
+
+## Technologies Used
+
+<ul>
+<li>
+Node.js
+</li>
+<li>
+Express.js
+</li>
+<li>
+TypeScript
+</li>
+<li>
+Sequelize ORM (for PostgreSQL)
+</li>
+<li>
+Cloudinary (for image uploads)
+</li>
+<li>
+Multer (for file uploads)
+</li>
+<li>
+JWT (for user authentication)
+</li>
+<li>
+Bcrypt (for password hashing)
+</li>
+<li>
+Nodemailer (for sending verification emails)
+</li>
+</ul>
+
+
+## License: This project is licensed under the MIT License.
